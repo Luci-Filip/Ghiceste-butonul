@@ -7,11 +7,12 @@
         <button id="buton-1">Butonul Unu</button>
         <button id="buton-2">Butonul Doi</button>
         <button id="buton-3">Butonul Trei</button>
+        <button id="buton-4">Butonul Patru</button>
     </body>
     <script>
         // Math.floor(Math.random() * 3) -> ia numere random de la 0 la 2
 
-        const randomValue = Math.floor(Math.random() * 3) + 1;
+        const randomValue = Math.floor(Math.random() * 4) + 1;
         console.log("Random value is " + randomValue);
         //let suma = 0;
         
@@ -25,6 +26,10 @@
         }
         document.getElementById("buton-3").onclick = () => {
             if(randomValue === 3)
+                alert("Ai nimerit");
+        }
+        document.getElementById("buton-4").onclick = () => {
+            if(randomValue === 4)
                 alert("Ai nimerit");
         }
     </script>
