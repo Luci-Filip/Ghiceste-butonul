@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Titlu interesant</title>
+    </head>
+    <body>
+        <h1>Salut</h1>
+        <button id="buton-1">Butonul Unu</button>
+        <button id="buton-2">Butonul Doi</button>
+        <button id="buton-3">Butonul Trei</button>
+    </body>
+    <script>
+        // Math.floor(Math.random() * 3) -> ia numere random de la 0 la 2
+
+        const randomValue = Math.floor(Math.random() * 3) + 1;
+        console.log("Random value is " + randomValue);
+        //let suma = 0;
+        
+        document.getElementById("buton-1").onclick = () => {
+            if(randomValue === 1)
+                alert("Ai nimerit");
+        }
+        document.getElementById("buton-2").onclick = () => {
+            if(randomValue === 2)
+                alert("Ai nimerit");
+        }
+        document.getElementById("buton-3").onclick = () => {
+            if(randomValue === 3)
+                alert("Ai nimerit");
+        }
+    </script>
+</html>
