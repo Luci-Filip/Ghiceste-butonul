@@ -3,23 +3,49 @@
         <title>Titlu meserias</title>
     </head>
     <body>
-        <h2>Salut</h1>
-        <button id="buton-1">Butonul unu</button>
-        <button id="buton-2">Butonul doi</button>
-        <button id="buton-3">Butonul trei</button>
-        <button id="buton-4">Butonul patru</button>
-        <button id="buton-5">Butonul cinci</button>
-        <button id="buton-6">Butonul sase</button>
-        <button id="buton-7">Butonul sapte</button>
-        <button id="buton-8">Butonul opt</button>
-        <button id="buton-9">Butonul noua</button>
-        <button id="buton-10">Butonul zece</button>
+        <h4>Introdu n mai jos</h4>
+        <input type="text" id="casutaInput">
+        <button id="butonTrimite">Trimite</button> <br/>
+        
+        <div id="locButoane">
+
+        </div>
     </body>
     <script>
-        var ramdomValue = Math.floor(Math.random() * 10) + 1;
-        console.log("Random value is " + randomValue);
-        for (var i = 0; i < ramdomValue; ++ i) {
+        let randomValue = 0;
+        let numar = 0;
+
+        const createButtons = () => {
+            console.log(`Creez ${numar} butoane`)
+            for(let i = 1; i <= numar; i++) {
+                const butonNou = document.createElement("button");
+                butonNou.setAttribute("id", `buton-${i}`);
+                butonNou.appendChild(document.createTextNode(`Butonul ${i}`));
+
+                const locatie = document.getElementById("locButoane");
+                locatie.append(butonNou);
+                locatie.append(document.createElement("br"));
+                locatie.append(document.createElement("br"));
+            }
+        };
+
+        const createListeners = () => {
+            for(let i = 1; i <= numar; i++) {
+                document.getElementById(`buton-${i}`).onclick = () => {
+                    if(randomValue === i)
+                        alert("Ai nimerit");
+                }
+            }
+        };
+        
+        document.getElementById("butonTrimite").onclick = () => {
+            numar = parseInt(document.getElementById("casutaInput").value);
+            createButtons();
             
-        }
+            randomValue = Math.floor(Math.random() * numar) + 1;
+            console.log(`Random value is ${randomValue}`);
+
+            createListeners();
+        };
     </script>
 </html>
