@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Intersting Title </title>
+    </head>
+    <body id = "exfrm" action = "" method = "post">
+      Dictionar: <br/>
+      <select name = "sel_list" id = "sel_list" size = "4" 
+      onchange = "adOption.selOpt(this.value, 'optval')">
+      </select><br/>
+      Adauga un cuvant: 
+      <input type = "text" name = "optval" id = "optval" /><br/><br/>
+      <input type = "button" id = "addopt" name = "addopt"
+      value = "Adauga Cuvant" onclick = "adOption.addOption('sel_list', 'optval');"/><br/><br/>
+      <input type = "button" id = "del_opt" name ="del_opt"
+      value = "Sterge Cuvant" onclick = "adOption.delOption('sel_list', 'optval');"/>
+    </body>
+
+    <script>
+      // creare obiect cu metode de adaugare si stergere <option></option>
+      var adOption = new Object(); // metoda care verifica daca optiunea e deja in list
+        // primeste id-ul listei <select></select>, si a casutei de text cu valoarea pentru <option>
+      adOption.checkList = function(list, optval) {
+        var existaCuvant = 0;   // vaioarea ce va fi returnata
+        // preia elementele <option>
+        var opts = document.getElementById(list).getElementsByTagName('option');
+        // daca optiunea exista se seteaza existaCuvant pe 1
+        for(var i = 0; i < opts.length; ++i) {
+            if(opts[i].value === document.getElementById(optval).value) {
+              existaCuvant = 1;
+               break;
+            }
+        }  
+      return existaCuvant; // returneaza valoarea lui existaCuvant
+      };
+        
+      // metoda de adaugare in lista <option>
+
+      adOption.addOption = function(list, optval) {
+            // poreia valoarea pentru <option>
+        var opt_val = document.getElementById(optval).value;
+            // verifica daca e adaugata valoare in Dictionar
+        if(opt_val.length > 0) {
+              // verifica sa nu existe deja acea optiune (cand checkList() returneaza 0)
+          if(this.checkList(list, optval) === 0) {
+                // creaza elementul <option> si-l adauga in lista
+            var myoption = document.createElement('option');
+            myoption.value = opt_val;
+            myoption.innerHTML = opt_val;
+            document.getElementById(list).insertBefore(myoption, document.getElementById(list).firstChild);
+            document.getElementById(optval).value = ''; // sterge valoarea din caseta de text
+          } else {
+              alert('Optiunea "'+opt_val+'" e deja adaugata');
+            }
+        } else {
+            alert('Adaugati o valoare pentru optiune');
+          }
+      };
+        
+      // metoda de stergere <option>
+
+      adOption.delOption = function(list, optval) {
+            // preia valoarea pentru <option> care trebuie stearsa
+      var opt_val = document.getElementById(optval).value;  
+            // verifica sa existe acea optiune (cand checkList() returneaza 1)
+        if(this.checkList(list, optval) === 1) {
+               // preia elementele <option> din lista <select>
+          var opts = document.getElementById(list).getElementsByTagName('option');
+              // parcurge sirul cu elementele <option>, sterge optiunea cu valoarea transmisa in "optval"
+          for(var i = 0; i < opts.length; ++i) {
+              if(opts[i].value === opt_val) {
+                document.getElementById(list).removeChild(opts[i]);
+                break;
+              }
+          }
+        } else {
+            alert('Optiunea cu valoare "'+opt_val+'" nu exista');
+          }
+      };
+        
+      // metoda care adauga optiunea selectata in caseta de text
+
+      adOption.selOpt = function(opt, txtbox) { document.getElementById(txtbox).value = opt; }
+
+    </script>
+</html>
